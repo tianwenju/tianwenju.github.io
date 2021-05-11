@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html>
+  <head>
+      <script>
+  var _hmt = _hmt || []
+  ;(function() {
+    var hm = document.createElement('script')
+    hm.src = 'https://hm.baidu.com/hm.js?5a0acc897fd96474a2c8f4deac84611a'
+    var s = document.getElementsByTagName('script')[0]
+    s.parentNode.insertBefore(hm, s)
+  })()
+</script> 
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="keywords" content="" />
+    <meta name="description" content="" />
+    
+    <title>
+      React-SSR(同构渲染) - Json
+    </title>
+    <link rel="manifest" href="/manifest.json" />
+    <link rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon" />
+    
+<link rel="stylesheet" href="/style/style.css">
+
+  </head>
+  <body>
+    <canvas id='pagemap'></canvas>
+    
+    <div id="post-toc" class="animated hiddenToc hide">
+      <span class="title">React-SSR(同构渲染)</span>
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#SSR介绍"><span class="toc-number">1.</span> <span class="toc-text">SSR介绍</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#为什么使用服务器端渲染-SSR-？"><span class="toc-number">2.</span> <span class="toc-text">为什么使用服务器端渲染(SSR)？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#核心原理-基于React"><span class="toc-number">3.</span> <span class="toc-text">核心原理(基于React)</span></a></li></ol>
+    </div>
+    
+    <div id="fixed-menu-wrap">
+      <span class="iconfont icon-sousuo search-box menu-reset"></span>
+      <span class="icon-toc menu-reset">Toc</span>
+      <span class="iconfont icon-arrowup menu-reset"></span>
+    </div>
+    <div id="fixed-menu">
+      <span class="iconfont icon-menu-"></span>
+    </div>
+    <div id="progress">
+      <div class="line"></div>
+    </div>
+    <div id="search-shade" class="animated hiddenSearch hide">
+      <div class="input-wrap">
+        <span class="iconfont icon-sousuo search-box"></span>
+        <input type="text" placeholder="Search" />
+        <span class="iconfont icon-close"></span>
+      </div>
+      <div class="search-result">
+        <div class="meta">
+          <span><b id="result-count">0</b> results found</span>
+          <img src="/images/logo.jpeg" />
+        </div>
+        <ul id="result-box"></ul>
+      </div>
+    </div>
+    <div id="menu-mask" class="animated hideMenuMask hide">
+      <span class="iconfont icon-close"></span>
+      <div class="nav">
+        
+        <a href="/" class="">
+          首页
+        </a>
+        
+        <a href="/archives" class="">
+          归档
+        </a>
+        
+        <a href="/categories" class="">
+          分类
+        </a>
+        
+        <a href="/tags" class="">
+          标签
+        </a>
+        
+        <a href="/friends" class="">
+          友链
+        </a>
+        
+        <a href="/about" class="">
+          关于
+        </a>
+        
+      </div>
+    </div>
+    <div id="header">
+      <div class="intro">
+        <a href="/" class="logo" style="background-image: url('/images/logo.jpeg')"></a>
+        <div class="author">Json</div>
+      </div>
+      <div class="nav">
+        <span class="iconfont icon-menu menu-icon"></span>
+        <a href="#" class="search-box">
+          <span class="iconfont icon-sousuo"></span>
+        </a>
+      </div>
+    </div>
+    <div id="side" class="animated bounceInLeft">
+      <div class="shrink">
+        <a href="/" class="logo" style="background-image: url('/images/logo.jpeg')"></a>
+        <span class="iconfont icon-menu toggle-icon"></span>
+        <a href="#" class="search-box">
+          <span class="iconfont icon-sousuo"></span>
+        </a>
+      </div>
+      <div class="magnify">
+        <div class="about">
+          <div class="author">Json</div>
+          <a href="/" class="logo" style="background-image: url('/images/logo.jpeg')"></a>
+        </div>
+
+        <div class="nav">
+          
+          <a href="/" class="">
+            首页
+          </a>
+          
+          <a href="/archives" class="">
+            归档
+          </a>
+          
+          <a href="/categories" class="">
+            分类
+          </a>
+          
+          <a href="/tags" class="">
+            标签
+          </a>
+          
+          <a href="/friends" class="">
+            友链
+          </a>
+          
+          <a href="/about" class="">
+            关于
+          </a>
+          
+          <a href="#" class="search-box">
+            <span class="iconfont icon-sousuo"></span>
+          </a>
+        </div>
+        <div class="bottom">
+          <div class="follow">
+            
+            <a href="https://github.com/tianwenju/tianwenju.github.io.git" target="_block">
+              <span class="iconfont icon-github"></span>
+            </a>
+            
+            <a href="mailto:21954906@qq.com" target="_block">
+              <span class="iconfont icon-QQ"></span>
+            </a>
+             
+            <a href="/atom.xml" target="_block">
+              <span class="iconfont icon-rss"></span>
+            </a>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="container">
+      <div class="main animated bounceInRight delay-0.7s">
+        <article class="post-entry">
+    <div class="header">
+      
+        <div class="top">
+          <div class="iconfont icon-zuirehotxiankuang animated infinite heartBeat"></div>
+        </div>
+      
+      <div class="title">React-SSR(同构渲染)</div>
+      <div class="meta">
+        <span class="item">
+          <span class="iconfont icon-time-circle"></span>
+          <span>2020/10/19</span>
+        </span>
+
+        
+          <span class="item leancloud-visitors" id="/2020/10/19/React-SSR-%E5%90%8C%E6%9E%84%E6%B8%B2%E6%9F%93/" data-flag-title="React-SSR(同构渲染)">
+            <span class="iconfont icon-eye1"></span>
+            <span class="leancloud-visitors-count"></span>
+          </span>
+        
+
+         
+        <span class="item">
+          <span class="iconfont icon-folder"></span>
+          <span>
+              
+                
+                  <a href="/categories/web">web</a>
+                
+              
+          </span>
+        </span>
+        
+        
+         
+          <span class="item">
+            <span class="iconfont icon-tag1"></span>
+            <span>
+                
+                  
+                    <a href="/tags/React">React</a>
+                  
+                
+            </span>
+          </span>
+         
+      </div>
+      <div>
+      </div>
+    </div>
+    <html><head><meta name="generator" content="Hexo 4.2.0"><link rel="alternate" href="/atom.xml" title="Json" type="application/atom+xml">
+<link rel="stylesheet" href="/assets/css/APlayer.min.css" class="aplayer-style-marker">
+<script src="/assets/js/APlayer.min.js" class="aplayer-script-marker"></script>
+<script src="/assets/js/Meting.min.js" class="meting-script-marker"></script>
+</head><body><h3 id="SSR介绍">SSR介绍<a class="post-anchor" href="#SSR介绍"></a></h3><p>Server Slide Rendering  服务端渲染</p>
+<h3 id="为什么使用服务器端渲染-SSR-？">为什么使用服务器端渲染(SSR)？<a class="post-anchor" href="#为什么使用服务器端渲染-SSR-？"></a></h3><ol>
+<li><p>更好的搜索引擎优化（Search-Engine-Optimization，SEO）</p>
+<ul>
+<li>大部分网站都希望自己能够出现在搜索引擎的搜索页前列，这个前提就是网页内容要能够被搜索引擎的爬虫正确抓取到。虽然 Google 这样的搜索引擎已经可以检索浏览器端渲染的网页，但毕竟不是全部搜索引擎都能做到，如果搜索引擎的爬虫只能拿到服务器端渲染的内容，完全浏览器端渲染就行不通了</li>
+</ul>
+</li>
+<li><p>可以缩短“第一有意义渲染时间”（First-Meaningful-Paint-Time）解决首屏白屏问题</p>
+<ul>
+<li>如果完全依赖于浏览器端渲染，那么服务器端返回的 HTML 就是一个空荡荡的框架和对 JavaScript 的应用，然后浏览器下载 JavaScript，再根据 JavaScript 中的 AJAX 调用获取服务器端数据，再渲染出 DOM 来填充网页内容，总共需要三个 HTTP 或 HTTPS 请求。</li>
+<li>如果使用服务器端渲染，第一个 HTTP/HTTPS 请求返回的 HTML 里就包含可以渲染的内容了，这样用户第一时间就会感觉到“有东西画出来了”，这样的感知性能更好。<h3 id="核心原理-基于React">核心原理(基于React)<a class="post-anchor" href="#核心原理-基于React"></a></h3>如下图：<br><a href="http://5b0988e595225.cdn.sohucs.com/images/20190919/745b23c1ac124d31a8b4af5cc8134b89.jpeg" target="_blank" rel="noopener" data-caption="image" data-fancybox="images"><img src="http://5b0988e595225.cdn.sohucs.com/images/20190919/745b23c1ac124d31a8b4af5cc8134b89.jpeg" alt="image"></a></li>
+</ul>
+</li>
+<li><p>服务端直接给出Html</p>
+<figure class="highlight coffeescript"><table><tbody><tr><td class="code"><pre><code class="hljs coffeescript"><span class="hljs-keyword">import</span> express <span class="hljs-keyword">from</span> <span class="hljs-string">"express"</span>;<br><span class="hljs-keyword">import</span> React <span class="hljs-keyword">from</span> <span class="hljs-string">"react"</span>;<br><span class="hljs-keyword">import</span> { renderToString } <span class="hljs-keyword">from</span> <span class="hljs-string">"react-dom/server"</span>;<br><span class="hljs-keyword">import</span> App <span class="hljs-keyword">from</span> <span class="hljs-string">"../client/app"</span>;<br>const app = <span class="hljs-keyword">new</span> express();<br>app.use(express.static(<span class="hljs-string">"public"</span>));<br><br>app.get(<span class="hljs-string">"/"</span>, <span class="hljs-function"><span class="hljs-params">(req, res)</span> =></span> {<br>  const App = renderToString(<App />);<br>  res.send(`<span class="javascript"> <html></span><br><span class="javascript">    <head></span><br><span class="javascript">        <title>hello world<<span class="hljs-regexp">/title></span></span><br><span class="javascript">    <<span class="hljs-regexp">/head></span></span><br><span class="javascript">    <body></span><br><span class="javascript">    <div>${App}<<span class="hljs-regexp">/div></span></span><br><span class="javascript">    <<span class="hljs-regexp">/script></span></span><br><span class="javascript">    <<span class="hljs-regexp">/body></span></span><br><span class="javascript"><<span class="hljs-regexp">/html></span></span>`);<br>});<br></code></pre></td></tr></tbody></table></figure>
+<figure class="highlight javascript"><table><tbody><tr><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">import</span> React <span class="hljs-keyword">from</span> <span class="hljs-string">"react"</span>;<br><span class="hljs-keyword">const</span> handleClick = <span class="hljs-function"><span class="hljs-params">()</span> =></span> {<br>  alert(<span class="hljs-string">"click"</span>);<br>};<br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">App</span>(<span class="hljs-params"></span>) </span>{<br>  <span class="hljs-keyword">return</span> <span class="xml"><span class="hljs-tag"><<span class="hljs-name">button</span> <span class="hljs-attr">onClick</span>=<span class="hljs-string">{handleClick}</span>></span>hello ssr <span class="hljs-tag"></<span class="hljs-name">button</span>></span></span>;<br>}<br><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> App;<br></code></pre></td></tr></tbody></table></figure>
+<p>浏览器访问返回的结构</p>
+<figure class="highlight xml"><table><tbody><tr><td class="code"><pre><code class="hljs xml"> <span class="hljs-tag"><<span class="hljs-name">html</span>></span><br>    <span class="hljs-tag"><<span class="hljs-name">head</span>></span><br>        <span class="hljs-tag"><<span class="hljs-name">title</span>></span>hello world<span class="hljs-tag"></<span class="hljs-name">title</span>></span><br>        <br>    <span class="hljs-tag"></<span class="hljs-name">head</span>></span><br>    <span class="hljs-tag"><<span class="hljs-name">body</span>></span><br>    <br>    <span class="hljs-tag"><<span class="hljs-name">div</span> <span class="hljs-attr">id</span>=<span class="hljs-string">"root"</span>></span><span class="hljs-tag"><<span class="hljs-name">button</span> <span class="hljs-attr">data-reactroot</span>=<span class="hljs-string">""</span>></span>hello ssr <span class="hljs-tag"></<span class="hljs-name">button</span>></span><span class="hljs-tag"></<span class="hljs-name">div</span>></span><br>    <span class="hljs-tag"></<span class="hljs-name">script</span>></span><br>    <span class="hljs-tag"></<span class="hljs-name">body</span>></span><br><span class="hljs-tag"></<span class="hljs-name">html</span>></span><br></code></pre></td></tr></tbody></table></figure>
+<p>此种情况下,并没有完成事件绑定呢？接下来就要用到如下</p>
+</li>
+<li><p>同构渲染（混合渲染）</p>
+<blockquote>
+<ul>
+<li>同构指的是一套代码在服务端和客户端运行，服务端输出html结构，数据，js，客户端接管页面进行补充渲染，填充数据，绑定事件等~</li>
+<li>一句话：数据和Html骨架有服务端给出,客户端补充渲染。</li>
+</ul>
+</blockquote>
+</li>
+</ol>
+<ul>
+<li>核心代码(server)<figure class="highlight coffeescript"><table><tbody><tr><td class="code"><pre><code class="hljs coffeescript"><span class="hljs-keyword">import</span> App <span class="hljs-keyword">from</span> <span class="hljs-string">"../client/app"</span>;<br>const app = <span class="hljs-keyword">new</span> express();<br>app.use(express.static(<span class="hljs-string">"public"</span>));<br><br>function Content() {<br>  <span class="hljs-keyword">return</span> <p><span class="hljs-keyword">this</span> <span class="hljs-keyword">is</span> content</p>;<br>}<br>app.get(<span class="hljs-string">"/"</span>, <span class="hljs-function"><span class="hljs-params">(req, res)</span> =></span> {<br>  const root = renderToString(<App />);<br>  res.send(`<span class="javascript"> <html></span><br><span class="javascript">    <head></span><br><span class="javascript">        <title>hello world<<span class="hljs-regexp">/title></span></span><br><span class="javascript">    <<span class="hljs-regexp">/head></span></span><br><span class="javascript">    <body></span><br><span class="javascript">      <div id=<span class="hljs-string">"root"</span>>${root}<<span class="hljs-regexp">/div></span></span><br><span class="javascript">    <script src =<span class="hljs-string">'./index.js'</span>></span><br><span class="javascript">    <<span class="hljs-regexp">/script></span></span><br><span class="javascript">    <<span class="hljs-regexp">/body></span></span><br><span class="javascript"><<span class="hljs-regexp">/html></span></span>`);<br>});<br></code></pre></td></tr></tbody></table></figure></li>
+<li>index.js(client)<figure class="highlight javascript"><table><tbody><tr><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">import</span> React <span class="hljs-keyword">from</span> <span class="hljs-string">'react'</span>;<br><span class="hljs-keyword">import</span> { hydrate } <span class="hljs-keyword">from</span> <span class="hljs-string">'react-dom'</span><br>hydrate(<span class="xml"><span class="hljs-tag"><<span class="hljs-name">APP</span> /></span></span>,<span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">"root"</span>))<br></code></pre></td></tr></tbody></table></figure>
+<figure class="highlight javascript"><table><tbody><tr><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">import</span> React <span class="hljs-keyword">from</span> <span class="hljs-string">"react"</span>;<br><span class="hljs-keyword">const</span> handleClick = <span class="hljs-function"><span class="hljs-params">()</span> =></span> {<br>  alert(<span class="hljs-string">"click"</span>);<br>};<br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">App</span>(<span class="hljs-params"></span>) </span>{<br>  <span class="hljs-keyword">return</span> <span class="xml"><span class="hljs-tag"><<span class="hljs-name">button</span> <span class="hljs-attr">onClick</span>=<span class="hljs-string">{handleClick}</span>></span>hello ssr <span class="hljs-tag"></<span class="hljs-name">button</span>></span></span>;<br>}<br><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> App;<br></code></pre></td></tr></tbody></table></figure>
+浏览器访问返回的结构<figure class="highlight xml"><table><tbody><tr><td class="code"><pre><code class="hljs xml"> <span class="hljs-tag"><<span class="hljs-name">html</span>></span><br>    <span class="hljs-tag"><<span class="hljs-name">head</span>></span><br>        <span class="hljs-tag"><<span class="hljs-name">title</span>></span>hello world<span class="hljs-tag"></<span class="hljs-name">title</span>></span><br>        <br>    <span class="hljs-tag"></<span class="hljs-name">head</span>></span><br>    <span class="hljs-tag"><<span class="hljs-name">body</span>></span><br>    <br>    <span class="hljs-tag"><<span class="hljs-name">div</span> <span class="hljs-attr">id</span>=<span class="hljs-string">"root"</span>></span><span class="hljs-tag"><<span class="hljs-name">button</span> <span class="hljs-attr">data-reactroot</span>=<span class="hljs-string">""</span>></span>hello ssr <span class="hljs-tag"></<span class="hljs-name">button</span>></span><span class="hljs-tag"></<span class="hljs-name">div</span>></span><br>    <span class="hljs-tag"><<span class="hljs-name">script</span> <span class="hljs-attr">src</span> =<span class="hljs-string">'./index.js'</span>></span><br>    <span class="hljs-tag"></<span class="hljs-name">script</span>></span><br>    <span class="hljs-tag"></<span class="hljs-name">body</span>></span><br><span class="hljs-tag"></<span class="hljs-name">html</span>></span><br></code></pre></td></tr></tbody></table></figure>
+其中关键点在于<figure class="highlight dust"><table><tbody><tr><td class="code"><pre><code class="hljs dust"><br><span class="xml">1. const root = renderToString(<span class="hljs-tag"><<span class="hljs-name">App</span> /></span>);</span><br><span class="xml">2. <span class="hljs-tag"><<span class="hljs-name">div</span> <span class="hljs-attr">id</span>=<span class="hljs-string">"root"</span>></span>$</span><span class="hljs-template-variable">{root}</span><span class="xml"><span class="hljs-tag"></<span class="hljs-name">div</span>></span></span><br><span class="xml">3. <span class="hljs-tag"><<span class="hljs-name">script</span> <span class="hljs-attr">src</span> =<span class="hljs-string">'./index.js'</span>></span></span><br></code></pre></td></tr></tbody></table></figure>
+
+</li>
+</ul>
+<p>通过 1和2,其实服务端已完成渲染，返回给我们html，但是我们还没有事件绑定，我们需要通过引用的脚本文件就是 hydrate(<app>,document.getElementById(“root”))。 交给浏览器完成事件绑定。</app></p>
+<p>那假如我们写成如下可以么？</p>
+<figure class="highlight xml"><table><tbody><tr><td class="code"><pre><code class="hljs xml">1. <span class="hljs-tag"><<span class="hljs-name">div</span> <span class="hljs-attr">id</span>=<span class="hljs-string">"root"</span>></span><span class="hljs-tag"></<span class="hljs-name">div</span>></span><br>2. <span class="hljs-tag"><<span class="hljs-name">script</span> <span class="hljs-attr">src</span> =<span class="hljs-string">'./index.js'</span>></span><br></code></pre></td></tr></tbody></table></figure>
+<p>去掉 renderToString的root常量可以么？浏览器访问返回的html如下：</p>
+<figure class="highlight xml"><table><tbody><tr><td class="code"><pre><code class="hljs xml"> <span class="hljs-tag"><<span class="hljs-name">html</span>></span><br>    <span class="hljs-tag"><<span class="hljs-name">head</span>></span><br>        <span class="hljs-tag"><<span class="hljs-name">title</span>></span>hello world<span class="hljs-tag"></<span class="hljs-name">title</span>></span><br>    <span class="hljs-tag"></<span class="hljs-name">head</span>></span><br>    <span class="hljs-tag"><<span class="hljs-name">body</span>></span><br>    <span class="hljs-tag"><<span class="hljs-name">div</span> <span class="hljs-attr">id</span>=<span class="hljs-string">"root"</span>></span><span class="hljs-tag"></<span class="hljs-name">div</span>></span><br>    <span class="hljs-tag"><<span class="hljs-name">script</span> <span class="hljs-attr">src</span> =<span class="hljs-string">'./index.js'</span>></span><br>    <span class="hljs-tag"></<span class="hljs-name">script</span>></span><br>    <span class="hljs-tag"></<span class="hljs-name">body</span>></span><br><span class="hljs-tag"></<span class="hljs-name">html</span>></span><br></code></pre></td></tr></tbody></table></figure>
+<p>此种情况下能够正常运行，但是这种情况下。生成的dom结构。通过hydrate(<app>,document.getElementById(“root”))也交给浏览器完成。显然此种，并不利于SEO优化。我们希望返回给浏览器的是比较完整dom结构，方便浏览器引擎爬虫。</app></p>
+<p>==* hydrate 描述的是 ReactDOM 复用 ReactDOMServer 服务端渲染的内容时尽可能保留结构，并补充事件绑定等 Client 特有内容的过程==。</p>
+<p><a href="https://github.com/tianwenju/react-ssr-demo/tree/ssr-demo1" target="_blank" rel="noopener">代码传送门</a></p>
+
+    <div id="aplayer-vBXfFNto" class="aplayer aplayer-tag-marker meting-tag-marker" data-id="60198" data-server="netease" data-type="playlist" data-mode="circulation" data-autoplay="true" data-mutex="false" data-listmaxheight="340px" data-preload="none" data-theme="#ad7a86"></div></body></html>
+
+  
+    <div class="post-reward">
+    <div id="reward-button">打赏</div>
+      <div id="qr">
+        <div class="wrap">
+            
+            <div class="bg-wrap">
+              <a href="/images/zhifubao.jpg" target="_block" class="bg" style="background-image:url('/images/zhifubao.jpg')"></a>
+              支付宝
+            </div>
+            
+            
+            <div class="bg-wrap">
+                <a href="/images/weixin.jpg" target="_block" class="bg" style="background-image:url('/images/weixin.jpg')"></a>
+              微信
+            </div>
+            
+        </div>
+      </div>
+    </div>
+  
+  <div class="post-guide">
+    <div class="item left">
+        
+    </div>
+    <div class="item right">
+        
+          <a href="/2020/04/14/material-ui-responsive/">Material-Ui 响应式布局</a>
+        
+    </div>
+  </div>
+  
+  
+  
+
+  <div class="post-copyright">
+    <div class="auth">
+      本文作者：<a href="https://tianwenju.github.io">Json</a>
+    </div>
+    <div class="link">
+      永久链接：<a href="https://tianwenju.github.io/2020/10/19/React-SSR-%E5%90%8C%E6%9E%84%E6%B8%B2%E6%9F%93/">https://tianwenju.github.io/2020/10/19/React-SSR-%E5%90%8C%E6%9E%84%E6%B8%B2%E6%9F%93/</a>
+    </div>
+    <div class="declare">
+      版权声明：本文首发于<a href="https://tianwenju.github.io">Json</a>的博客，转载请注明出处！
+    </div>
+  </div>
+
+  <div id="comment"></div>
+
+  
+  
+</article>
+        <footer>
+          <div class="copyright">
+            ©2021
+            <a href="https://tianwenju.github.io">Json</a> Powered by <a href="https://hexo.io" target="_blank" rel="noopener">Hexo</a> |
+            <a href="https://github.com/shixiaohu2206/hexo-theme-huhu" target="_blank" rel="noopener">hexo-theme-huhu</a>
+          </div>
+          
+        </footer>
+      </div>
+    </div>
+  </body>
+  
+</html>
+<script type="text/javascript">
+                  window.HUHU_CONFIG = JSON.parse("{\"share\":[\"weibo\",\"weixin\",\"qqkongjian\",\"QQ\",\"douban\",\"facebook\",\"twitter\",\"google\"],\"valine\":{\"API_ID\":\"uURUBbq8EtNP0U8Ll0uM51lD-gzGzoHsz\",\"API_KEY\":\"GKl6v75nwdFPXd2kiRTChUfL\"},\"service_worker\":{\"open\":false}}")
+                </script> <script type="text/javascript">window.addEventListener('load', function() {
+    
+    window.loadJs = function(d, m, a) {
+      var c = document.getElementsByTagName('head')[0] || document.head || document.documentElement
+      var b = document.createElement('script')
+      b.defer = true
+      b.setAttribute('type', 'text/javascript')
+      b.setAttribute('charset', 'UTF-8')
+      b.setAttribute('async', 'true')
+      b.setAttribute('src', d)
+      m && b.setAttribute('data-main', '/scripts/app-built')
+      if (typeof a === 'function') {
+        if (window.attachEvent) {
+          b.onreadystatechange = function() {
+            var e = b.readyState
+            if (e === 'loaded' || e === 'complete') {
+              b.onreadystatechange = null
+              a()
+            }
+          }
+        } else {
+          b.onload = a
+        }
+      }
+      c.appendChild(b)
+    }
+    window.loadJs && window.loadJs('https://cdn.bootcss.com/require.js/2.3.6/require.min.js', true, function() {require.config({"paths":{"util":"util","share":"share","search":"search","pagemap":"pagemap.min","registerSW":"registerSW","valine":"cdn/Valine.min","av":["https://cdn.jsdelivr.net/npm/leancloud-storage/dist/av-min"],"pjax":["https://cdn.bootcss.com/jquery.pjax/2.0.1/jquery.pjax.min"],"jquery":["https://cdn.bootcss.com/jquery/3.4.1/jquery.min"],"confirm":["https://cdn.bootcss.com/jquery-confirm/3.3.4/jquery-confirm.min"],"fancybox":["https://cdn.bootcss.com/fancybox/3.5.7/jquery.fancybox.min"],"chart":["https://cdn.bootcss.com/Chart.js/2.8.0-rc.1/Chart.bundle.min"]},"map":{"*":{"css":"https://cdn.bootcss.com/require-css/0.1.10/css.min.js"}},"shim":{"fancybox":{"deps":["css!https://cdn.bootcss.com/fancybox/3.5.7/jquery.fancybox.min.css"]},"confirm":{"deps":["css!https://cdn.bootcss.com/jquery-confirm/3.3.4/jquery-confirm.min.css"]},"chart":{"deps":["css!https://cdn.bootcss.com/Chart.js/2.8.0-rc.1/Chart.min.css"]}},"waitSeconds":3})})
+  })</script> <script type="text/javascript">
+                  ;(function() {
+                    var bp = document.createElement('script')
+                    var curProtocol = window.location.protocol.split(':')[0]
+                    if (curProtocol === 'https') {
+                      bp.src = 'https://zz.bdstatic.com/linksubmit/push.js'
+                    } else {
+                      bp.src = 'http://push.zhanzhang.baidu.com/push.js'
+                    }
+                    var s = document.getElementsByTagName('script')[0]
+                    s.parentNode.insertBefore(bp, s)
+                  })()
+                </script> 
